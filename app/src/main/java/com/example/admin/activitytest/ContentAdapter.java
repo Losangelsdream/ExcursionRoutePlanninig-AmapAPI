@@ -51,9 +51,9 @@ public class ContentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHold holder = null;
+        ViewHold hold = null;
         if (convertView == null) {
-            holder = new ViewHold();
+            hold = new ViewHold();
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.content_item, null);
             convertView.setTag(hold);

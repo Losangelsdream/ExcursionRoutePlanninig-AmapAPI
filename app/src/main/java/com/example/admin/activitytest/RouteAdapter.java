@@ -48,16 +48,25 @@ public class RouteAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.route_item,parent,false);
-
-
-        TextView Cost_View = (TextView) convertView.findViewById(R.id.TotalCost);
-        TextView Time_View = (TextView) convertView.findViewById(R.id.TotalTime);
-
-        Cost_View.setText(list.get(position).getTotalCost());
-        Time_View.setText(String.valueOf(list.get(position).getTotalTime()));
+        ViewHolder holder = null;
+        if(convertView == null)
+        {
+            convertView = LayoutInflater.from(context).inflate(R.layout.route_item,parent,false);
+            holder = new ViewHolder();
+            holder.Cost_View = (TextView) convertView.findViewById(R.id.TotalCost);
+            holder.Time_View = (TextView) convertView.findViewById(R.id.TotalTime);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder)convertView.getTag();
+        }
+        holder.Time_View.setText(String.valueOf(list.get(position).getTotalTime()));
+        holder.Cost_View.setText(String.valueOf(list.get(position).getTotalCost()));
         return convertView;
     }
 
+    private class ViewHolder{
+        TextView Cost_View;
+        TextView Time_View;
+    }
 
 }
