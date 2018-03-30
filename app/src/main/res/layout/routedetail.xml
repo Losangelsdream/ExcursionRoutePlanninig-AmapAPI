@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/navigation"/>
+        <com.amap.api.maps.MapView
+            android:layout_below="@id/title_bar"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </com.amap.api.maps.MapView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/pic1"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/route"/>
+        <TextView
+            android:layout_toRightOf="@id/pic1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="6dp"
+            android:text="路线A"
+            android:textSize="19dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+
+
+

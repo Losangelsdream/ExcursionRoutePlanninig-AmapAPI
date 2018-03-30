@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.admin.activitytest.SecondActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="120dp"
+         android:padding="10dp">
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center_vertical"
+             android:orientation="vertical">
+
+             <ImageView
+                 android:layout_width="30dp"
+                 android:layout_height="30dp"
+                 android:src="@drawable/startpoint" />
+
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="0.1dp"
+                 android:layout_marginBottom="10dp"
+                 android:layout_marginTop="10dp"
+                />
+
+             <ImageView
+                 android:layout_width="30dp"
+                 android:layout_height="30dp"
+                 android:src="@drawable/endpoint" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="8"
+             android:orientation="vertical"
+             android:padding="10dp">
+
+             <EditText
+                 android:id="@+id/start_address"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:singleLine="true"
+                 android:layout_gravity="center_vertical"
+                 android:ellipsize="end"
+                 android:background="@null"
+                 android:textColor="#E0E0E0"
+                 android:textSize="16sp" />
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="0.1dp"
+                 android:layout_marginBottom="10dp"
+                 android:layout_marginTop="20dp"
+                 android:background="@color/black"/>
+
+             <EditText
+                 android:id="@+id/end_address"
+                 android:ellipsize="end"
+                 android:singleLine="true"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:background="@null"
+                 android:text="目的地"
+                 android:textColor="#E0E0E0"
+                 android:textSize="16sp" />
+         </LinearLayout>
+
+         <ImageView
+             android:id="@+id/map_route_exchange"
+             android:layout_width="43dp"
+             android:layout_height="35dp"
+             android:layout_gravity="center_vertical"
+             android:layout_weight="1"
+             android:src="@drawable/exchange" />
+     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="5dp"
+            android:text="时间预算(小时):"
+            android:textColor="@color/black"/>
+
+        <com.example.admin.activitytest.RangeSeekBar
+            android:id="@+id/TimeBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rsb_markTextArray="@array/markArray"
+            app:rsb_lineColorSelected="@color/colorAccent"
+            app:rsb_lineColorEdge="@color/colorSeekBarDefault"
+            app:rsb_cellMode="number"
+            app:rsb_textPadding="15dp"
+            app:rsb_cells="1"
+            app:rsb_equal="8"
+            app:rsb_min="0"
+            app:rsb_max="8"
+            app:rsb_seekBarMode="range"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="5dp"
+            android:text="经济预算(元):"
+            android:textColor="@color/black"/>
+
+        <com.example.admin.activitytest.RangeSeekBar
+            android:id="@+id/financialBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rsb_markTextArray="@array/markArray"
+            app:rsb_lineColorSelected="@color/colorAccent"
+            app:rsb_lineColorEdge="@color/colorSeekBarDefault"
+            app:rsb_cellMode="number"
+            app:rsb_textPadding="15dp"
+            app:rsb_cells="1"
+            app:rsb_equal="5"
+            app:rsb_min="0"
+            app:rsb_max="1000"
+            app:rsb_seekBarMode="range"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black" />
+
+    <TextView android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="偏好设置"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp">
+
+
+            <CheckBox
+                android:id="@+id/hobby_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="风景名胜" />
+
+            <CheckBox
+                android:id="@+id/hobby_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="历史博物" />
+
+            <CheckBox
+                android:id="@+id/hobby_mall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大宗商场" />
+
+
+            <CheckBox
+                android:id="@+id/hobby_eatery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="美食餐厅" />
+    </LinearLayout>
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black" />
+    
+    
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:text="开始规划"
+        android:id="@+id/buttonSubscribe"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_selector" />
+</LinearLayout>
+    
+
+
+</LinearLayout>
