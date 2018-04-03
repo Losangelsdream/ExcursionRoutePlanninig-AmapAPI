@@ -8,5 +8,5 @@
     <color name="colorBackline">#9D9D9D</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-
+    <color name="colorSeekBarDefault">#c3c3c3</color>
 </resources>

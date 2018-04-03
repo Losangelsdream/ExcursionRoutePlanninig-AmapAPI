@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="StateButton">
-
-        <!--text color-->
-        <attr name="normalTextColor" format="color|reference"/>
-        <attr name="pressedTextColor" format="color|reference"/>
-        <attr name="unableTextColor" format="color|reference"/>
-
-        <!--stroke width and color, dash width, dash gap-->
-        <attr name="strokeDashWidth" format="dimension|reference"/>
-        <attr name="strokeDashGap" format="dimension|reference"/>
-        <attr name="normalStrokeWidth" format="dimension|reference"/>
-        <attr name="pressedStrokeWidth" format="dimension|reference"/>
-        <attr name="unableStrokeWidth" format="dimension|reference"/>
-        <attr name="normalStrokeColor" format="color|reference"/>
-        <attr name="pressedStrokeColor" format="color|reference"/>
-        <attr name="unableStrokeColor" format="color|reference"/>
-
-        <!--background color-->
-        <attr name="normalBackgroundColor" format="color|reference"/>
-        <attr name="pressedBackgroundColor" format="color|reference"/>
-        <attr name="unableBackgroundColor" format="color|reference"/>
-
-        <!--background radius-->
-        <attr name="radius" format="dimension|reference"/>
-        <attr name="round" format="boolean|reference"/>
-
-        <!--animation duration-->
-        <attr name="animationDuration" format="integer|reference"/>
-
-    </declare-styleable>
-
-    <declare-styleable name="StateImageView">
-        <attr name="normalBackground" format="color|reference"/>
-        <attr name="pressedBackground" format="color|reference"/>
-        <attr name="unableBackground" format="color|reference"/>
-
-        <!--animation duration-->
-        <attr name="AnimationDuration" format="integer|reference"/>
+    <string-array name="markArray">
+        <item>0</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+    <declare-styleable name="RangeSeekBar">
+        <attr name="rsb_max" format="integer"/>
+        <attr name="rsb_min" format="integer"/>
+        <attr name="rsb_reserve" format="float"/>
+        <attr name="rsb_cells" format="integer"/>
+        <attr name="rsb_equal" format="integer"/>
+        <attr name="rsb_progressHintMode" format="enum">
+            <enum name="defaultMode" value="0"/>
+            <enum name="alwaysHide" value="1"/>
+            <enum name="touchAlwaysShow" value="2"/>
+            <enum name="alwaysShow" value="3"/>
+        </attr>
+        <attr name="rsb_lineColorSelected" format="color"/>
+        <attr name="rsb_lineColorEdge" format="color"/>
+        <attr name="rsb_thumbPrimaryColor" format="color"/>
+        <attr name="rsb_thumbSecondaryColor" format="color"/>
+        <attr name="rsb_markTextArray" format="reference"/>
+        <attr name="rsb_thumbResId" format="reference"/>
+        <!-- must use 9 path ！！！-->
+        <attr name="rsb_progressHintResId" format="reference"/>
+        <attr name="rsb_textPadding" format="dimension" />
+        <attr name="rsb_textSize" format="dimension" />
+        <attr name="rsb_hintBGHeight" format="dimension" />
+        <attr name="rsb_hintBGWith" format="dimension" />
+        <attr name="rsb_hintBGPadding" format="dimension" />
+        <attr name="rsb_seekBarHeight" format="dimension"/>
+        <attr name="rsb_thumbSize" format="dimension"/>
+        <attr name="rsb_cellMode" format="enum">
+            <enum name="number" value="0"/>
+            <enum name="other" value="1"/>
+        </attr>
+        <attr name="rsb_seekBarMode" format="enum">
+            <enum name="single" value="1"/>
+            <enum name="range" value="2"/>
+        </attr>
+        <attr name="rsb_lineRadius" format="dimension"/>
     </declare-styleable>
 </resources>

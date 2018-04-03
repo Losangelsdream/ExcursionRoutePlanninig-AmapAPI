@@ -128,7 +128,7 @@ public class RangeSeekBar extends View {
 
     //真实的最大值和最小值
     //True maximum and minimum values
-    private int mMin,mMax;
+    private float mMin,mMax;
     private int equal;
 
     private boolean isEnable = true;
@@ -162,8 +162,8 @@ public class RangeSeekBar extends View {
         TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.RangeSeekBar);
         cellsCount = t.getInt(R.styleable.RangeSeekBar_rsb_cells, 1);
         reserveValue = t.getFloat(R.styleable.RangeSeekBar_rsb_reserve, 0);
-        mMin = t.getInt(R.styleable.RangeSeekBar_rsb_min, 0);
-        mMax = t.getInt(R.styleable.RangeSeekBar_rsb_max, 100);
+        mMin = t.getFloat(R.styleable.RangeSeekBar_rsb_min,0);
+        mMax = t.getFloat(R.styleable.RangeSeekBar_rsb_max, 100);
         equal = t.getInt(R.styleable.RangeSeekBar_rsb_equal,4);
         mThumbResId = t.getResourceId(R.styleable.RangeSeekBar_rsb_thumbResId, 0);
         mProgressHintBGId = t.getResourceId(R.styleable.RangeSeekBar_rsb_progressHintResId, 0);
@@ -269,8 +269,13 @@ public class RangeSeekBar extends View {
         // Draw the scales, and according to the current position is set within
         // the scale range of different color display
         mPartLength = lineWidth / equal-1;
-        for (int a = mMin; a <= mMax; a += (mMax - mMin) / equal)
+        int b=(int)mMin;
+        System.out.println(b);
+
+
+        for (int a = (int)mMin; a <= (int)mMax; a += (int)((mMax - mMin) / equal))
         {
+            System.out.println(a);
         if (mCellMode == 1){
             mCursorPaint.setColor(colorLineEdge);
                 }else {
