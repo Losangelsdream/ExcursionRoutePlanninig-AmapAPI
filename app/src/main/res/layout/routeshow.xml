@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="68dp"
+    sothree:umanoPanelHeight="110dp"
     sothree:umanoShadowHeight="4dp">
 
 <RelativeLayout
@@ -26,9 +26,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center|top">
+        android:gravity="center|top"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/recommendText"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="推荐线路"
+            android:textSize="15dp"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_below="@id/recommendText"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#F5F5F5" />
+
         <ListView
+            android:layout_below="@id/line"
             android:id="@+id/bottom_listview"
+            android:dividerHeight="5dp"
+            android:divider="#F5F5F5"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>

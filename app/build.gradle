@@ -29,12 +29,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //3D地图so及jar
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
-    compile 'com.amap.api:3dmap:latest.integration'
-    //定位功能
-    compile 'com.amap.api:location:latest.integration'
+
     //搜索功能
     compile 'com.amap.api:search:latest.integration'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.amap.api:navi-3dmap:latest.integration'
+    compile 'com.amap.api:location:latest.integration'
     compile 'com.sothree.slidinguppanel:library:3.2.0'
 
 
