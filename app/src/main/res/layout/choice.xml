@@ -106,15 +106,15 @@
             android:id="@+id/TimeBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:rsb_equal="8"
             app:rsb_markTextArray="@array/markArray"
             app:rsb_lineColorSelected="@color/colorAccent"
             app:rsb_lineColorEdge="@color/colorSeekBarDefault"
             app:rsb_cellMode="number"
             app:rsb_textPadding="15dp"
             app:rsb_cells="1"
-            app:rsb_equal="8"
             app:rsb_min="0"
-            app:rsb_max="8"
+            app:rsb_max="10"
             app:rsb_seekBarMode="range"
             />
 
