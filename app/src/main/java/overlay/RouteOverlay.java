@@ -202,6 +202,24 @@ public class RouteOverlay {
 			return;
 		}
 		Polyline polyline = mAMap.addPolyline(options);
+
+		if(polyline != null) {
+			allPolyLines.add(polyline);
+		}
+	}
+
+	protected void addPolyLine2(PolylineOptions options) {
+		if(options == null) {
+			return;
+		}
+		List<BitmapDescriptor> texTuresList = new ArrayList<BitmapDescriptor>();
+		texTuresList.add(BitmapDescriptorFactory.fromResource(R.drawable.map_alr));
+		List<Integer> texIndexList = new ArrayList<Integer>();
+		texIndexList.add(0);
+		options.setCustomTextureList(texTuresList);
+		options.setCustomTextureIndex(texIndexList);
+		Polyline polyline = mAMap.addPolyline(options);
+
 		if(polyline != null) {
 			allPolyLines.add(polyline);
 		}

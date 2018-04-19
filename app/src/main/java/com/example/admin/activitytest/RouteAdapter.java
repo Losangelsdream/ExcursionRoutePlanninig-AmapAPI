@@ -98,9 +98,9 @@ public class RouteAdapter extends BaseAdapter {
 
     public String FormatTimeToString(double time)
     {
-        double all_seconds = time*60*60;
-        int hour = (int) (all_seconds/3600);
-        int minute = (int) ((all_seconds-hour*3600)/60);
+
+        int hour = (int) (time/3600);
+        int minute = (int) ((time-hour*3600)/60);
         FormatTime = hour+"小时"+minute+"分钟";
         return FormatTime;
     }

@@ -13,7 +13,7 @@ public class Preparer {
     public double exceptMoney;
     public int size;
 
-    Preparer(double[][] a,double[][] b,double[] c,double[] d,double e,double f,int g)
+   public Preparer(double[][] a,double[][] b,double[] c,double[] d,double e,double f,int g)
     {
         timeMutix=a;
         moneyMutix=b;

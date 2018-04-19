@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.LatLng;
@@ -268,8 +269,8 @@ public class BusRouteOverlay extends RouteOverlay {
 		if (listPoints.size() < 1) {
 			return;
 		}
-		addPolyLine(new PolylineOptions().width(getRouteWidth())
-				.color(getBusColor())
+		addPolyLine2(new PolylineOptions().width(getRouteWidth()*2)
+				.color(Color.parseColor("#FFFFFF"))
 				.addAll(AMapUtil.convertArrList(listPoints)));
 	}
 

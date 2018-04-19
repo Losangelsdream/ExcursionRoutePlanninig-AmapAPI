@@ -38,6 +38,7 @@ public class Route_plan_show_Activity extends AppCompatActivity  implements Adap
         Intent intent = getIntent();
         String startpoint = intent.getStringExtra("startpoint");
         String destination = intent.getStringExtra("destination");
+        list = (ArrayList<RouteModel>) intent.getSerializableExtra("routepoi");
         StartingPoint_view = (TextView) findViewById(R.id.start_address);
         EndPoint_view = (TextView) findViewById(R.id.end_address);
         StartingPoint_view.setText(startpoint);
@@ -54,35 +55,17 @@ public class Route_plan_show_Activity extends AppCompatActivity  implements Adap
 
     private void initData()
     {
-        scenicSpot.add("北京邮电大学");
-        scenicSpot.add("北海公园");
-        scenicSpot.add("天安门");
-        scenicSpot.add("北京站");
-
-        scenicSpot2.add("北京邮电大学");
-        scenicSpot2.add("故宫博物馆");
-        scenicSpot2.add("天坛公园");
-        scenicSpot2.add("北京站");
-
-        scenicSpot3.add("北京邮电大学");
-        scenicSpot3.add("北京动物园");
-        scenicSpot3.add("西单");
-        scenicSpot3.add("北京站");
-
-
-
-        list = new ArrayList<RouteModel>();
-        list.add(new RouteModel(1, 2.5, 270,scenicSpot));
-        list.add(new RouteModel(2, 3, 0,scenicSpot2));
-        list.add(new RouteModel( 3,4.5, 500,scenicSpot3));
+        System.out.println(list.get(0).getTotalTime());
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         RouteModel route_choice = list.get(position);
         ArrayList<String> route_poi = (ArrayList<String>) route_choice.getScenicSpot();
+
         Intent intent = new Intent(Route_plan_show_Activity.this, NavActivity.class);
         intent.putStringArrayListExtra("route_poi",route_poi);
+        intent.putExtra("route",route_choice);
         startActivity(intent);
     }
 }

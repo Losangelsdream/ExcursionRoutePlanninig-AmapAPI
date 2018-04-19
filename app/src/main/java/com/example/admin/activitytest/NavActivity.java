@@ -28,7 +28,7 @@ import com.amap.api.services.route.WalkRouteResult;
 
 import java.util.ArrayList;
 
-public class NavActivity extends AppCompatActivity implements OnGeocodeSearchListener,OnRouteSearchListener{
+public class NavActivity extends AppCompatActivity implements OnRouteSearchListener{
     private AMap aMap;
     private MapView mapView;
     private Context mContext;
@@ -47,13 +47,14 @@ public class NavActivity extends AppCompatActivity implements OnGeocodeSearchLis
     private RouteSearch routeSearch3;
     private BusRouteResult busrouteResult;
     private int counter = 0;
+    private RouteModel routemodel;
 
     public static LatLonPoint Point;
     private LatLonPoint wayPoint1;
     private LatLonPoint wayPoint2;
     private LatLonPoint endPoint;
 
-    public static ArrayList<LatLonPoint>  wayPoints = new ArrayList<LatLonPoint>();
+    public ArrayList<LatLonPoint>  wayPoints = new ArrayList<LatLonPoint>();
 
     private RouteOverLay mRouteOverLay;
     private AMapNavi aMapNavi;
@@ -68,50 +69,34 @@ public class NavActivity extends AppCompatActivity implements OnGeocodeSearchLis
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         initView();
         Intent intent = getIntent();
-        ArrayList<String> route_poi = intent.getStringArrayListExtra("route_poi");
-        poi_length = route_poi.size();
-        dataLoad(route_poi);
+        routemodel = (RouteModel)intent.getSerializableExtra("route");
+
+
+        dataLoad();
 
 
 
     }
 
-    private void dataLoad(ArrayList<String> route_poi) {
-        geocoderSearch = new GeocodeSearch(this);
-        geocoderSearch.setOnGeocodeSearchListener(this);
-       for(int s=0; s<=route_poi.size()-1;s++)
-       {
-           GeocodeQuery query = new GeocodeQuery(route_poi.get(s), "010");
-           geocoderSearch.getFromLocationNameAsyn(query);
-           try {
-               Thread.sleep(300);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
-
-
-    }
-
-    private void searchRouteResult(int routeType, int mode) {
-        if (wayPoints.get(0) == null) {
-            Toast.makeText(NavActivity.this, "正在定位中，稍后再试...", Toast.LENGTH_SHORT).show();
+    private void dataLoad() {
+        routeSearch = new RouteSearch(this);
+        routeSearch.setRouteSearchListener(this);
+        for(int i=0;i<=routemodel.getPoiLongtitude().size()-1;i++)
+        {
+            LatLonPoint latlon = new LatLonPoint(routemodel.getPoiLatitude().get(i),routemodel.getPoiLongtitude().get(i));
+            wayPoints.add(latlon);
         }
-        if (wayPoints.get(wayPoints.size() - 1) == null) {
-            Toast.makeText(NavActivity.this, "无终点", Toast.LENGTH_SHORT).show();
-        }
+        for (i = 0; i < wayPoints.size() - 1; i++) {
 
-            final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(wayPoints.get(i),wayPoints.get(i+1));
-            System.out.println(wayPoints.get(i));
-            System.out.println(wayPoints.get(i+1));
 
-            if (routeType == ROUTE_TYPE_BUS) {
-                RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, mode, mCurrentCityName, 0);
-             routeSearch.calculateBusRouteAsyn(query);
+                final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(wayPoints.get(i),wayPoints.get(i+1));
+                RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, ROUTE_TYPE_BUS, mCurrentCityName, 0);
+                routeSearch.calculateBusRouteAsyn(query);
             }
 
 
-        }
+    }
+
 
     private void initView() {
         if (aMap == null)
@@ -182,40 +167,5 @@ public class NavActivity extends AppCompatActivity implements OnGeocodeSearchLis
 
     }
 
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    @Override
-    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-
-    }
-
-    @Override
-    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-        Point = geocodeResult.getGeocodeAddressList().get(0).getLatLonPoint();
-        wayPoints.add(Point);
-        if(wayPoints.size()==poi_length) {
-            for (i = 0; i < wayPoints.size() - 1; i++) {
-                routeSearch = new RouteSearch(this);
-                routeSearch.setRouteSearchListener(this);
-                if (wayPoints.get(0) == null) {
-                    Toast.makeText(NavActivity.this, "正在定位中，稍后再试...", Toast.LENGTH_SHORT).show();
-                }
-                if (wayPoints.get(wayPoints.size() - 1) == null) {
-                    Toast.makeText(NavActivity.this, "无终点", Toast.LENGTH_SHORT).show();
-                }
-
-                final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(wayPoints.get(i),wayPoints.get(i+1));
-                RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, ROUTE_TYPE_BUS, mCurrentCityName, 0);
-                routeSearch.calculateBusRouteAsyn(query);
-                }
-            }
-        }
 
 }

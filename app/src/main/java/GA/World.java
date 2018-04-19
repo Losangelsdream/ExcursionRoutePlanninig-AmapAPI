@@ -33,7 +33,7 @@ public class World {
     
     private final int maxKing=5;
     
-    World(Preparer x) {
+    public World(Preparer x) {
         age = 0;
         this.timeMutix=x.timeMutix;
         this.moneyMutix=x.moneyMutix;
@@ -127,14 +127,15 @@ public class World {
     
     public boolean goNext()
     {
-        if(age>50)return false;
+        if(age>500)return false;
         return true;
     }
     
     public void Evolution()
     {
         System.out.println("N0."+age+" Begin");
-         population=muti.run(population,judger);
+         //population=muti.run(population,judger);
+        population=mutor.run(population,judger);
          population=mutor.run(population,judger);
          population=elimate.run(population);
          System.out.println("Num of this G "+population.staff.size());

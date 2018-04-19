@@ -61,20 +61,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" >
-
-        </activity>
-        <activity android:name=".Route_plan_show_Activity" ></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".Route_plan_show_Activity" />
         <activity android:name=".Route_plan_detail_Activity" />
         <activity
             android:name=".Splash_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeSplash">
+            android:theme="@style/ThemeSplash" />
+        <activity android:name=".NavActivity" />
+        <activity android:name=".PoiSearchActivity" />
+        <activity android:name=".Test">
 
-
-        </activity>
-        <activity android:name=".NavActivity"></activity>
-        <activity android:name=".PoiSearchActivity">
 
         </activity>
     </application>

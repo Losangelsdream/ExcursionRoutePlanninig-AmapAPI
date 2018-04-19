@@ -33,7 +33,6 @@ public class Mutor {
                 else start=0;
                 int end=start+fate;
                 if(end>=x.staff.get(i).path.size())end=x.staff.get(i).path.size()-1;
-                System.out.println(start+" "+end);
                 int ep;
                 while(true)
                 {
