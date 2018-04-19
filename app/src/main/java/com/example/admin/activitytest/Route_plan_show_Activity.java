@@ -60,12 +60,15 @@ public class Route_plan_show_Activity extends AppCompatActivity  implements Adap
         scenicSpot.add("北京站");
 
         scenicSpot2.add("北京邮电大学");
-        scenicSpot2.add("天坛公园");
         scenicSpot2.add("故宫博物馆");
+        scenicSpot2.add("天坛公园");
+        scenicSpot2.add("北京站");
 
-        scenicSpot3.add("北京站");
+        scenicSpot3.add("北京邮电大学");
+        scenicSpot3.add("北京动物园");
         scenicSpot3.add("西单");
-        scenicSpot3.add("雍和宫");
+        scenicSpot3.add("北京站");
+
 
 
         list = new ArrayList<RouteModel>();
