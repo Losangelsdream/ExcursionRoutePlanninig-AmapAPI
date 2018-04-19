@@ -39,6 +39,7 @@ public class Route_plan_show_Activity extends AppCompatActivity  implements Adap
         String startpoint = intent.getStringExtra("startpoint");
         String destination = intent.getStringExtra("destination");
         list = (ArrayList<RouteModel>) intent.getSerializableExtra("routepoi");
+
         StartingPoint_view = (TextView) findViewById(R.id.start_address);
         EndPoint_view = (TextView) findViewById(R.id.end_address);
         StartingPoint_view.setText(startpoint);

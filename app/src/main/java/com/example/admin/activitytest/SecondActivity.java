@@ -71,6 +71,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private final int ROUTE_TYPE_BUS = 1;
 
 
+
     public  JSONObject jo = new JSONObject();
 
 
@@ -260,6 +261,54 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+
+
+
+    private  void arrangementSelect(ArrayList<Integer> dataList, ArrayList<Integer>tmpResultList, int resultIndex ,ArrayList<Integer> resultList,double resultTime) {
+        // 递归选择下一个
+        if(tmpResultList.size()==dataList.size())
+        {
+            double totaltime=0;
+            for (int t=0;t< tmpResultList.size()-1;t++)
+            {
+                totaltime += poiItemResult.get(tmpResultList.get(t)).getTime_cost()+poi_way_Tcost[tmpResultList.get(t)][tmpResultList.get(t+1)];
+            }
+            totaltime+=poi_way_Tcost[tmpResultList.get(0)][0];
+            totaltime+=poi_way_Tcost[tmpResultList.get(tmpResultList.size()-1)][1];
+            if(resultTime>totaltime)
+            {
+                resultTime=totaltime;
+                resultList=new ArrayList<Integer>();
+                for(int i=0;i<tmpResultList.size();i++)
+                {
+                    resultList.add(tmpResultList.get(i));
+                }
+
+            }
+        }
+        else{
+        for (int i = 0; i < dataList.size(); i++) {
+            // 判断待选项是否存在于排列结果中
+            boolean exists = false;
+            for (int j = 0; j < resultIndex; j++) {
+                if (dataList.get(i).equals(tmpResultList.get(j))) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) { // 排列结果不存在该项，才可选择
+                tmpResultList.add(dataList.get(i));
+                arrangementSelect(dataList, tmpResultList, resultIndex + 1,resultList,resultTime);
+                tmpResultList.remove(tmpResultList.size()-1);
+            }
+        }
+        }
+
+    }
+
+
+
     @Override
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
 
@@ -433,10 +482,20 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(poiID+"  ");
                         System.out.println(poiname);
                     }
-                    for (int t=0;t< poiID.size()-1;t++)
+
+                    Integer end=poiID.get(poiID.size()-1);
+                    poiID.remove(0);
+                    poiID.remove(poiID.size()-1);
+                    ArrayList<Integer> tmpResultList=new ArrayList<Integer>();
+                    ArrayList<Integer> resultList=new ArrayList<Integer>();
+                    arrangementSelect(poiID,tmpResultList,0,resultList,999999);
+
+                    resultList.add(end);
+                    resultList.add(0,0);
+                    for (int t=0;t< resultList.size()-1;t++)
                     {
-                        totaltime = poiItemResult.get(poiID.get(t)).getTime_cost()+poi_way_Tcost[poiID.get(t)][poiID.get(t+1)];
-                        totalcost = (int) (poiItemResult.get(poiID.get(t)).getMoney_cost()+poi_way_Mcost[poiID.get(t)][poiID.get(t+1)]);
+                        totaltime = poiItemResult.get(resultList.get(t)).getTime_cost()+poi_way_Tcost[resultList.get(t)][resultList.get(t+1)];
+                        totalcost = (int) (poiItemResult.get(resultList.get(t)).getMoney_cost()+poi_way_Mcost[resultList.get(t)][resultList.get(t+1)]);
                     }
                     System.out.println("总时间花费:"+totaltime);
                     System.out.println("总金钱花费:"+totalcost);
