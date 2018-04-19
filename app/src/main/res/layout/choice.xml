@@ -41,7 +41,9 @@
              android:layout_height="match_parent"
              android:layout_weight="8"
              android:orientation="vertical"
-             android:padding="10dp">
+             android:padding="10dp"
+             android:focusable="true"
+             android:focusableInTouchMode="true">
 
              <EditText
                  android:id="@+id/start_address"
@@ -51,7 +53,7 @@
                  android:layout_gravity="center_vertical"
                  android:ellipsize="end"
                  android:background="@null"
-                 android:textColor="#E0E0E0"
+                 android:textColor="@color/black"
                  android:textSize="16sp" />
              <View
                  android:layout_width="match_parent"
@@ -68,8 +70,9 @@
                  android:layout_height="wrap_content"
                  android:layout_gravity="center_vertical"
                  android:background="@null"
-                 android:text="目的地"
-                 android:textColor="#E0E0E0"
+                 android:hint="目的地"
+                 android:textColorHint="#E0E0E0"
+                 android:textColor="@color/black"
                  android:textSize="16sp" />
          </LinearLayout>
 

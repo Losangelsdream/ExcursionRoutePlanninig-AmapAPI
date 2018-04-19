@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="68dp"
+    sothree:umanoPanelHeight="110dp"
     sothree:umanoShadowHeight="4dp">
 
 <RelativeLayout
@@ -13,22 +13,113 @@
     android:layout_height="match_parent">
     <include layout="@layout/navigation"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/SearchInfo"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#FCFCFC"
+        android:padding="10dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/startpoint" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/endpoint" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/start_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/black"/>
+
+        <TextView
+            android:id="@+id/end_address"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="目的地"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>
     <com.amap.api.maps.MapView
-        android:layout_below="@id/title_bar"
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/SearchInfo"
         android:orientation="vertical">
     </com.amap.api.maps.MapView>
-
 
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|top">
+        android:layout_height="400dp"
+        android:gravity="center|top"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/recommendText"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="推荐线路"
+            android:textSize="15dp"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_below="@id/recommendText"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#F5F5F5" />
+
         <ListView
+            android:layout_below="@id/line"
             android:id="@+id/bottom_listview"
+            android:dividerHeight="5dp"
+            android:divider="#F5F5F5"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>
