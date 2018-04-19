@@ -58,10 +58,7 @@ public class NavActivity extends AppCompatActivity implements OnGeocodeSearchLis
     private RouteOverLay mRouteOverLay;
     private AMapNavi aMapNavi;
 
-    //private NaviLatLng startPoint = new NaviLatLng(39.961580,116.357770);
-    //private NaviLatLng endPoint = new NaviLatLng(39.904556,116.427231);
-    //private NaviLatLng wayPoint1 = new NaviLatLng(39.9261934962,116.3895034790);
-    //private NaviLatLng wayPoint2 = new NaviLatLng(39.9081561294,116.3980865479);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +90,6 @@ public class NavActivity extends AppCompatActivity implements OnGeocodeSearchLis
            }
        }
 
-
-//       startPoint = new LatLonPoint(39.961580,116.357770);//北京邮电大学
-//       wayPoint1 = new LatLonPoint(39.926193,116.389503);//北海公园
-//       wayPoint2 = new LatLonPoint(39.908156,116.398086);//天安门
-//       endPoint = new LatLonPoint(39.904556,116.427231);//北京站
 
     }
 

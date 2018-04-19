@@ -102,7 +102,7 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onLocationChanged(AMapLocation amapLocation) { //大小写问题
             if (amapLocation != null) {
-                System.out.println("经度:" + amapLocation.getLongitude() + "纬度:" + amapLocation.getLatitude() + "地址:" + amapLocation.getAddress());
+//                System.out.println("经度:" + amapLocation.getLongitude() + "纬度:" + amapLocation.getLatitude() + "地址:" + amapLocation.getAddress());
                 test=amapLocation.getAddress();
             } else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。

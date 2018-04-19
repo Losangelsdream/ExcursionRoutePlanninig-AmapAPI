@@ -5,24 +5,24 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
-import com.amap.api.services.geocoder.GeocodeSearch;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener{
+public class Route_plan_show_Activity extends AppCompatActivity  implements AdapterView.OnItemClickListener{
     private List<RouteModel> list = null;
     private List<String> scenicSpot = new ArrayList<String>();
     private List<String> scenicSpot2 = new ArrayList<String>();
     private List<String> scenicSpot3 = new ArrayList<String>();
     private ListView listview = null;
+    private TextView StartingPoint_view;
+    private TextView EndPoint_view;
     private RouteAdapter adapter = null;
     private Context context;
 
@@ -30,10 +30,19 @@ public class ThirdActivity extends AppCompatActivity  implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.routeshow);
-        context = ThirdActivity.this;
+        context = Route_plan_show_Activity.this;
         MapView mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         AMap aMap = mapView.getMap();
+
+        Intent intent = getIntent();
+        String startpoint = intent.getStringExtra("startpoint");
+        String destination = intent.getStringExtra("destination");
+        StartingPoint_view = (TextView) findViewById(R.id.start_address);
+        EndPoint_view = (TextView) findViewById(R.id.end_address);
+        StartingPoint_view.setText(startpoint);
+        EndPoint_view.setText(destination);
+
         initData();
         listview = (ListView) findViewById(R.id.bottom_listview);
         adapter = new RouteAdapter(this, list);
@@ -69,7 +78,7 @@ public class ThirdActivity extends AppCompatActivity  implements AdapterView.OnI
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         RouteModel route_choice = list.get(position);
         ArrayList<String> route_poi = (ArrayList<String>) route_choice.getScenicSpot();
-        Intent intent = new Intent(ThirdActivity.this, NavActivity.class);
+        Intent intent = new Intent(Route_plan_show_Activity.this, NavActivity.class);
         intent.putStringArrayListExtra("route_poi",route_poi);
         startActivity(intent);
     }
