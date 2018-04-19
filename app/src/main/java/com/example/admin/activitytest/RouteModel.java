@@ -9,21 +9,22 @@ import java.util.List;
 
 public class RouteModel {
     private int ID;
-    private float totalTime;
+    private double totalTime;
     private int totalCost;
-    private List<Double> RoutePartTime=new ArrayList<>();
     private List<String> scenicSpot = new ArrayList<>();
+
+    private List<Double> RoutePartTime=new ArrayList<>();
     private List<Integer> RoutePartCost = new ArrayList<>();
     private List<Integer> RoutePartCategory = new ArrayList<>();
 
 
 
-    public RouteModel(float totalTime,int totalCost)
+    public RouteModel(int id,double totalTime,int totalCost,List<String> scenicSpot)
     {
-//       this.ID=id;
+       this.ID=id;
        this.totalTime=totalTime;
        this.totalCost=totalCost;
-//       this.scenicSpot = scenicSpot;
+       this.scenicSpot = scenicSpot;
 //       this.RoutePartTime=RoutePartTime;
 //       this.RoutePartCost=RoutePartCost;
 //       this.RoutePartCategory=RoutePartCategory;
@@ -62,11 +63,11 @@ public class RouteModel {
         this.totalCost = totalCost;
     }
 
-    public float getTotalTime() {
+    public double getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(float totalTime) {
+    public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 

@@ -1,25 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
-    android:gravity="center">
+    android:paddingTop="3dp"
+    android:background="@color/white"
+    android:paddingBottom="3dp">
 
-    <TextView
-        android:id="@+id/TotalCost"
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="75dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ID"
+            android:layout_width="95dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="3dp"
+            android:text="路线A"
+            android:textSize="18dp"
+            />
+
+    <LinearLayout
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/money"/>
+        <TextView
+            android:id="@+id/TotalCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:text="花费270元"
+            android:textSize="12dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="95dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/time"/>
+        <TextView
+            android:id="@+id/TotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:text="3小时25分钟"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="12dp"/>
+</LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="1dip"
+        android:layout_height="50dp"
+        android:background="#BEBEBE"
+        android:layout_marginLeft="3dp"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="bb"
-        android:layout_marginRight="5dp"
-        android:textSize="14dp"/>
+        android:layout_height="75dp">
+        <TextView
+            android:id="@+id/route_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:textSize="12dp"/>
 
-    <TextView
-        android:id="@+id/TotalTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="aa"
-        android:textSize="14dp"/>
-
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

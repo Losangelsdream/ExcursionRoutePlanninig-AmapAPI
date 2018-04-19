@@ -12,13 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include layout="@layout/navigation"/>
-        <com.amap.api.maps.MapView
-            android:layout_below="@id/title_bar"
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        </com.amap.api.maps.MapView>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -43,7 +37,6 @@
             android:layout_marginLeft="6dp"
             android:text="路线A"
             android:textSize="19dp"/>
-
     </RelativeLayout>
 
 </RelativeLayout>
