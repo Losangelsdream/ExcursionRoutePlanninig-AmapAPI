@@ -279,12 +279,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             if(resultTime>totaltime)
             {
                 resultTime=totaltime;
-                resultList=new ArrayList<Integer>();
+                resultList.clear();
                 for(int i=0;i<tmpResultList.size();i++)
                 {
                     resultList.add(tmpResultList.get(i));
                 }
-
             }
         }
         else{
@@ -466,12 +465,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 ArrayList<Integer> poiID = new ArrayList<Integer>();
                 ArrayList<Double> poiLatitude = new ArrayList<Double>();
                 ArrayList<Double> poiLongtitude = new ArrayList<Double>();
-                double totaltime=0;
-                int totalcost=0;
 
                 while(world.goNext())world.Evolution();
                 for(int i=0;i<world.king.staff.size();i++)
                 {
+                    double totaltime=0;
+                    int totalcost=0;
                     System.out.println("路线"+i);
                     for(int j=0;j<world.king.staff.get(i).path.size();j++)
                     {
@@ -483,24 +482,36 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(poiname);
                     }
 
-                    Integer end=poiID.get(poiID.size()-1);
+
                     poiID.remove(0);
                     poiID.remove(poiID.size()-1);
                     ArrayList<Integer> tmpResultList=new ArrayList<Integer>();
                     ArrayList<Integer> resultList=new ArrayList<Integer>();
                     arrangementSelect(poiID,tmpResultList,0,resultList,999999);
 
-                    resultList.add(end);
+                    resultList.add(1);
                     resultList.add(0,0);
+                    System.out.println(resultList+"  ");
                     for (int t=0;t< resultList.size()-1;t++)
                     {
-                        totaltime = poiItemResult.get(resultList.get(t)).getTime_cost()+poi_way_Tcost[resultList.get(t)][resultList.get(t+1)];
-                        totalcost = (int) (poiItemResult.get(resultList.get(t)).getMoney_cost()+poi_way_Mcost[resultList.get(t)][resultList.get(t+1)]);
+                        totaltime += poiItemResult.get(resultList.get(t)).getTime_cost()+poi_way_Tcost[resultList.get(t)][resultList.get(t+1)];
+                        totalcost += (int) (poiItemResult.get(resultList.get(t)).getMoney_cost()+poi_way_Mcost[resultList.get(t)][resultList.get(t+1)]);
                     }
                     System.out.println("总时间花费:"+totaltime);
                     System.out.println("总金钱花费:"+totalcost);
 
+                    poiname.clear();
+                    poiLatitude.clear();
+                    poiLongtitude.clear();
 
+                    for(int j=0;j<resultList.size();j++)
+                    {
+                        poiname.add(poiItemResult.get(resultList.get(j)).getName());
+                        poiLatitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLatitude());//纬度
+                        poiLongtitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLongitude());//经度
+                        System.out.println(resultList+"  ");
+                        System.out.println(poiname);
+                    }
 
 
 
@@ -511,9 +522,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     poiID = new ArrayList<Integer>();
                     poiLatitude = new ArrayList<Double>();
                     poiLongtitude = new ArrayList<Double>();
-                    totaltime=0;
-                    totalcost=0;
-
                     System.out.println();
                 }
 
