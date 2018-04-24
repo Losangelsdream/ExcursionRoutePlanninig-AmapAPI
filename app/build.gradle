@@ -19,23 +19,21 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     //3D地图so及jar
     compile 'com.github.Jay-Goo:RangeSeekBar:v1.2.2'
-
     //搜索功能
     compile 'com.amap.api:search:latest.integration'
     compile 'com.amap.api:navi-3dmap:latest.integration'
     compile 'com.amap.api:location:latest.integration'
     compile 'com.sothree.slidinguppanel:library:3.2.0'
     compile 'com.alibaba:fastjson:1.2.46'
-
-
+    compile 'org.litepal.android:core:1.6.1'
+    implementation files('libs/mysql-connector-java-5.1.46.jar')
 }

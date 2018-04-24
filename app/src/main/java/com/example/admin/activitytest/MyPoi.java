@@ -18,6 +18,10 @@ public class MyPoi {
         this.money_cost = money_cost;
         this.latlonp = latlonp;
     }
+    public MyPoi()
+    {
+
+    }
 
     public String getName() {
         return name;

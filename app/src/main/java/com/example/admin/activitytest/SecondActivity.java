@@ -417,8 +417,16 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 ArrayList<Integer> poiID = new ArrayList<Integer>();
                 ArrayList<Double> poiLatitude = new ArrayList<Double>();
                 ArrayList<Double> poiLongtitude = new ArrayList<Double>();
+                ArrayList<Integer> SortList = new ArrayList<Integer>();
                 double totaltime=0;
+
                 int totalcost=0;
+                ArrayList<String> poiname_sort = new ArrayList<String>();
+                ArrayList<Double> poiLatitude_sort = new ArrayList<Double>();
+                ArrayList<Double> poiLongtitude_sort = new ArrayList<Double>();
+                double totaltime_sort=0;
+
+                int totalcost_sort=0;
 
                 while(world.goNext())world.Evolution();
                 for(int i=0;i<world.king.staff.size();i++)
@@ -433,19 +441,72 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(poiID+"  ");
                         System.out.println(poiname);
                     }
-                    for (int t=0;t< poiID.size()-1;t++)
+//                    for (int t=0;t< poiID.size()-1;t++)
+//                    {
+//                        totaltime = poiItemResult.get(poiID.get(t)).getTime_cost()+poi_way_Tcost[poiID.get(t)][poiID.get(t+1)];
+//                        totalcost = (int) (poiItemResult.get(poiID.get(t)).getMoney_cost()+poi_way_Mcost[poiID.get(t)][poiID.get(t+1)]);
+//                    }
+//                    System.out.println("总时间花费:"+totaltime);
+//                    System.out.println("总金钱花费:"+totalcost);
+                    SortList.add(0);
+                    int win=0;
+                    for(int temp=1;temp<poiLatitude.size()-1;temp++)
                     {
-                        totaltime = poiItemResult.get(poiID.get(t)).getTime_cost()+poi_way_Tcost[poiID.get(t)][poiID.get(t+1)];
-                        totalcost = (int) (poiItemResult.get(poiID.get(t)).getMoney_cost()+poi_way_Mcost[poiID.get(t)][poiID.get(t+1)]);
+                        if(poiLatitude.get(temp)>poiLatitude.get(0)&&poiLongtitude.get(temp)>poiLatitude.get(0))
+                        {
+                            win=poiID.get(temp);
+                            SortList.add(win);
+                        }
+                        else if(poiLatitude.get(temp)>poiLatitude.get(0)&&poiLongtitude.get(temp)<poiLatitude.get(0))
+                        {
+                            win=poiID.get(temp);
+                            SortList.add(win);
+                        }
+                        else if(poiLatitude.get(temp)<poiLatitude.get(0)&&poiLongtitude.get(temp)<poiLatitude.get(0))
+                        {
+                            win=poiID.get(temp);
+                            SortList.add(win);
+                        }
+                        else if(poiLatitude.get(temp)<poiLatitude.get(0)&&poiLongtitude.get(temp)>poiLatitude.get(0))
+                        {
+                            win=poiID.get(temp);
+                            SortList.add(win);
+                        }
+
                     }
-                    System.out.println("总时间花费:"+totaltime);
-                    System.out.println("总金钱花费:"+totalcost);
+                    SortList.add(1);
+                    for(int temp=0; temp<=SortList.size()-1;temp++)
+                    {
+                        System.out.println(SortList.get(temp));
+                    }
+
+
+                    for (int temp5=0;temp5<=SortList.size()-1;temp5++)
+                    {
+                        poiname_sort.add(poiItemResult.get(SortList.get(temp5)).getName());
+                        poiLatitude_sort.add(poiItemResult.get(SortList.get(temp5)).getLatlonp().getLatitude());//纬度
+                        poiLongtitude_sort.add(poiItemResult.get(SortList.get(temp5)).getLatlonp().getLongitude());//经度
+                    }
+
+                    for (int t=0;t< SortList.size()-1;t++)
+                    {
+                        totaltime_sort = poiItemResult.get(SortList.get(t)).getTime_cost()+poi_way_Tcost[SortList.get(t)][SortList.get(t+1)];
+                        totalcost_sort = (int) (poiItemResult.get(SortList.get(t)).getMoney_cost()+poi_way_Mcost[SortList.get(t)][SortList.get(t+1)]);
+                    }
+                    System.out.println("总时间花费:"+totaltime_sort);
+                    System.out.println("总金钱花费:"+totalcost_sort);
+
+
+                      //  左走 经度 减小  纬度 不变
+                      //  右走 经度 增大  纬度  不变
+                      //  上走 经度 不变 纬读增加
+                     // 下走  经度不变 纬读减小
 
 
 
 
 
-                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude,poiLongtitude,totaltime,totalcost,poiname);
+                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude_sort,poiLongtitude_sort,totaltime_sort,totalcost_sort,poiname_sort);
                     poiroute.add(RecommendRoute);
 
                     poiname = new ArrayList<String>();
@@ -454,6 +515,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     poiLongtitude = new ArrayList<Double>();
                     totaltime=0;
                     totalcost=0;
+                    poiname_sort = new ArrayList<String>();
+                    SortList.clear();
+                    poiLatitude_sort = new ArrayList<Double>();
+                    poiLongtitude_sort = new ArrayList<Double>();
+                    totaltime_sort=0;
+                    totalcost_sort=0;
 
                     System.out.println();
                 }

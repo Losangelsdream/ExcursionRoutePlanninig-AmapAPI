@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.amap.api.maps.MapView
-        android:id="@+id/mapshow"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    </com.amap.api.maps.MapView>
-</LinearLayout>
+        android:layout_height="match_parent">
+        <include layout="@layout/navigation"
+                 android:id="@+id/nav"/>
+        <com.amap.api.maps.MapView
+            android:id="@+id/mapshow2"
+            android:layout_below="@id/nav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </com.amap.api.maps.MapView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:gravity="center|top"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/recommendText"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="推荐线路"
+            android:textSize="15dp"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_below="@id/recommendText"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#F5F5F5" />
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

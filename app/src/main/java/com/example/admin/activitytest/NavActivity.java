@@ -65,17 +65,17 @@ public class NavActivity extends AppCompatActivity implements OnRouteSearchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testnav);
-        mapView = (MapView) findViewById(R.id.mapshow);
+        mapView = (MapView) findViewById(R.id.mapshow2);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         initView();
         Intent intent = getIntent();
         routemodel = (RouteModel)intent.getSerializableExtra("route");
 
+        Intent intent2 = new Intent(NavActivity.this,Test.class);
+        intent2.putExtra("testroute",routemodel);
+        startActivity(intent2);
 
         dataLoad();
-
-
-
     }
 
     private void dataLoad() {
@@ -113,7 +113,8 @@ public class NavActivity extends AppCompatActivity implements OnRouteSearchListe
             {
 
                   busrouteResult = result;
-                  BusPath busPath = result.getPaths().get(1);
+                  BusPath busPath = result.getPaths().get(0);
+
                   busrouteOverlay = new BusRouteOverlay(mContext,aMap,busPath,result.getStartPos(),result.getTargetPos());
                   if(result.getStartPos().toString().equals(wayPoints.get(wayPoints.size()-2).toString()))
                   {
@@ -136,8 +137,6 @@ public class NavActivity extends AppCompatActivity implements OnRouteSearchListe
                       busrouteOverlay.zoomToSpan();
                       counter+=1;
                   }
-                //BusResultListAdapter mBusResultListAdapter = new BusResultListAdapter(mContext, mBusRouteResult);
-               // mBusResultList.setAdapter(mBusResultListAdapter);
             }else if (result != null && result.getPaths() == null) {
                 Toast.makeText(NavActivity.this,"无路线",Toast.LENGTH_SHORT).show();
             } else{

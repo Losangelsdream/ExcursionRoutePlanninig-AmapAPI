@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.activitytest.Test">
-    <com.amap.api.maps.MapView
-        android:id="@+id/mapshow"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="68dp"
+    sothree:umanoShadowHeight="4dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    </com.amap.api.maps.MapView>
+        android:layout_height="match_parent">
+        <include layout="@layout/navigation"
+            android:id="@+id/nav"/>
+        <com.amap.api.maps.MapView
+            android:id="@+id/mapshow3"
+            android:layout_below="@id/nav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </com.amap.api.maps.MapView>
+    </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:gravity="center|top"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/recommendText"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="推荐线路"
+            android:textSize="15dp"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_below="@id/recommendText"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#F5F5F5" />
+
+        <ListView
+            android:layout_below="@id/line2"
+            android:id="@+id/listview"
+            android:dividerHeight="5dp"
+            android:divider="#F5F5F5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
