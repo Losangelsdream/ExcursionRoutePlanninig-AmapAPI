@@ -80,7 +80,7 @@ public class DetailAdapter extends BaseAdapter {
         if(list.get(position).getTrans_Mode()==1)
         {
 
-            System.out.println("公交模式第"+position);
+
             String Bus_direction=(list.get(position).getBus_Direction());
             String start_station = (list.get(position).getBus_Start());
             String end_station = (list.get(position).getBus_Des());
@@ -111,12 +111,13 @@ public class DetailAdapter extends BaseAdapter {
             String Walk_distance="步行"+(list.get(position).getWalk_distance().toString())+"米";
             String Walk_Duration="("+FormatTimeToString(list.get(position).getWalk_time())+")";
 
+            holder.Bus_Icon.setVisibility(View.VISIBLE);
             holder.Bus_direction.setTextSize(13);
             holder.Bus_direction.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
             holder.Bus_direction.setText(Walk_distance+Walk_Duration);
             holder.Line.setImageResource(R.drawable.walkbar);
+            holder.Bus_Icon.setImageResource(R.drawable.walk_icon);
 
-            
             holder.Start_station.setVisibility(View.GONE);
             holder.End_station.setVisibility(View.GONE);
             holder.Bus_number.setVisibility(View.GONE);
@@ -127,6 +128,7 @@ public class DetailAdapter extends BaseAdapter {
         else if(list.get(position).getTrans_Mode()==2)
         {
 
+            holder.Bus_Icon.setVisibility(View.GONE);
             holder.Start_station.setVisibility(View.GONE);
             holder.End_station.setVisibility(View.GONE);
             holder.Bus_number.setVisibility(View.GONE);
@@ -145,6 +147,7 @@ public class DetailAdapter extends BaseAdapter {
         else if(list.get(position).getTrans_Mode()==3)
         {
 
+            holder.Bus_Icon.setVisibility(View.GONE);
             holder.Start_station.setVisibility(View.GONE);
             holder.End_station.setVisibility(View.GONE);
             holder.Bus_number.setVisibility(View.GONE);
@@ -160,6 +163,7 @@ public class DetailAdapter extends BaseAdapter {
         else if(list.get(position).getTrans_Mode()==4)
         {
 
+            holder.Bus_Icon.setVisibility(View.VISIBLE);
             holder.Start_station.setVisibility(View.INVISIBLE);
             holder.End_station.setVisibility(View.INVISIBLE);
             holder.Bus_number.setVisibility(View.INVISIBLE);

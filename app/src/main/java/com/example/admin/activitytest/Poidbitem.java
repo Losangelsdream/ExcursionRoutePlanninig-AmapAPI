@@ -4,16 +4,23 @@ import com.amap.api.services.core.LatLonPoint;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Admin on 2018/4/24.
  */
 
 public class Poidbitem extends DataSupport {
+    private int Id;
     private String name;
     private float time_cost;
     private float money_cost;
     private String lantitude;
     private String longtitude;
+    private List<Routedbitem> routedbitem1 = new ArrayList<Routedbitem>();
+
+
 
     public String getName() {
         return name;
@@ -54,6 +61,23 @@ public class Poidbitem extends DataSupport {
 
     public void setLongtitude(String longtitude) {
         this.longtitude = longtitude;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+
+    public List<Routedbitem> getRoutedbitem1() {
+        return routedbitem1;
+    }
+
+    public void setRoutedbitem1(List<Routedbitem> routedbitem1) {
+        this.routedbitem1 = routedbitem1;
     }
 }
 

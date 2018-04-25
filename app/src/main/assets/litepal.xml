@@ -4,5 +4,7 @@
     <version value="1"></version>
     <list>
         <mapping class="com.example.admin.activitytest.Poidbitem"></mapping>
+        <mapping class="com.example.admin.activitytest.Poidbitem2"></mapping>
+        <mapping class="com.example.admin.activitytest.Routedbitem"></mapping>
     </list>
 </litepal>

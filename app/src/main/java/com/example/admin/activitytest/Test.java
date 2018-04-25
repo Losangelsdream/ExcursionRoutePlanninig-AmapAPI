@@ -215,7 +215,8 @@ public class Test extends AppCompatActivity implements RouteSearch.OnRouteSearch
             System.out.println("判断中列表长度为"+(routemodel.getPoiLatitude().size()-1));
             counter_recall =0;
             detail = new Detail(End_Mode,routemodel.getScenicSpot().get(routemodel.getScenicSpot().size()-1));
-            detail_list.add(detail);
+            detail_list.add(detail);//加入终点
+            detail_list.remove(detail_list.size()-2);//删掉倒数第二个并不是景点的位置
             for(int t=0;t<=detail_list.size()-1;t++)
             {
                 System.out.println(detail_list.get(t).to_MyString());

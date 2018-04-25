@@ -63,16 +63,19 @@
             android:name=".Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash" >
+
+        </activity>
+        <activity android:name=".NavActivity" />
+        <activity android:name=".PoiSearchActivity" />
+        <activity android:name=".Test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NavActivity" />
-        <activity android:name=".PoiSearchActivity" />
-        <activity android:name=".Test"></activity>
         <activity android:name=".DataInitActivity">
+
 
         </activity>
     </application>
