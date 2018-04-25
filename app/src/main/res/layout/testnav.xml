@@ -35,11 +35,20 @@
             android:textSize="15dp"/>
 
         <View
-            android:id="@+id/line"
+            android:id="@+id/line2"
             android:layout_below="@id/recommendText"
             android:layout_width="fill_parent"
             android:layout_height="5dp"
             android:background="#F5F5F5" />
+
+        <ListView
+            android:layout_below="@id/line2"
+            android:id="@+id/listview"
+            android:dividerHeight="5dp"
+            android:divider="#F5F5F5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
     </RelativeLayout>
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
