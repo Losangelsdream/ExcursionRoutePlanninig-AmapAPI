@@ -265,8 +265,9 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private  void arrangementSelect(ArrayList<Integer> dataList, ArrayList<Integer>tmpResultList, int resultIndex ,ArrayList<Integer> resultList,double resultTime) {
+    private  void arrangementSelect(ArrayList<Integer> dataList, ArrayList<Integer>tmpResultList, int resultIndex ,ArrayList<Integer> resultList,double resultTime[]) {
         // 递归选择下一个
+       // System.out.println("最初的结构："+resultTime[0]);
         if(tmpResultList.size()==dataList.size())
         {
             double totaltime=0;
@@ -274,17 +275,21 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             {
                 totaltime += poiItemResult.get(tmpResultList.get(t)).getTime_cost()+poi_way_Tcost[tmpResultList.get(t)][tmpResultList.get(t+1)];
             }
-            totaltime+=poi_way_Tcost[tmpResultList.get(0)][0];
+            totaltime+=poiItemResult.get(tmpResultList.get(tmpResultList.size()-1)).getTime_cost();
+            totaltime+=poi_way_Tcost[0][tmpResultList.get(0)];
             totaltime+=poi_way_Tcost[tmpResultList.get(tmpResultList.size()-1)][1];
-            if(resultTime>totaltime)
+            if(resultTime[0]>totaltime)
             {
-                resultTime=totaltime;
+                resultTime[0]=totaltime;
                 resultList.clear();
                 for(int i=0;i<tmpResultList.size();i++)
                 {
                     resultList.add(tmpResultList.get(i));
                 }
+                System.out.println(resultTime[0]);
+                System.out.println(resultList+" ");
             }
+
         }
         else{
         for (int i = 0; i < dataList.size(); i++) {
@@ -303,7 +308,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         }
-
     }
 
 
@@ -481,13 +485,13 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(poiID+"  ");
                         System.out.println(poiname);
                     }
-
-
                     poiID.remove(0);
                     poiID.remove(poiID.size()-1);
                     ArrayList<Integer> tmpResultList=new ArrayList<Integer>();
                     ArrayList<Integer> resultList=new ArrayList<Integer>();
-                    arrangementSelect(poiID,tmpResultList,0,resultList,999999);
+                    double[] resultTime=new double[1];
+                    resultTime[0]=999999;
+                    arrangementSelect(poiID,tmpResultList,0,resultList,resultTime);
 
                     resultList.add(1);
                     resultList.add(0,0);
@@ -512,8 +516,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(resultList+"  ");
                         System.out.println(poiname);
                     }
-
-
 
                     RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude,poiLongtitude,totaltime,totalcost,poiname);
                     poiroute.add(RecommendRoute);
@@ -553,7 +555,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
-
     }
 }
 
