@@ -25,7 +25,7 @@ public class Mutor {
         for(int i=0;i<l;i++)
         {
             fate=rou.getRoulInt();
-            if(x.staff.get(i).path.size()>=15)continue;
+            if(x.staff.get(i).path.size()>=9)continue;
             if(fate!=0)
             {
                 int start;

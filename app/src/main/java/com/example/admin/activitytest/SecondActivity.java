@@ -416,7 +416,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             }
             System.out.println("计数器数值" + counter);
 //            System.out.println("POI点数" + poiItemResult.size());
-            if (counter == poiItemResult.size()*poiItemResult.size()-3) {
+            if (counter == poiItemResult.size()*poiItemResult.size()) {
                 for (int i = 0; i <= poiItemResult.size() - 1; i++) {
 
                     for (int j = 0; j <= poiItemResult.size() - 1; j++) {
