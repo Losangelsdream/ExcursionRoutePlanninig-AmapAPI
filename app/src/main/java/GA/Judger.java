@@ -47,14 +47,22 @@ public class Judger {
         difTime=Math.abs(time-sumTime);
         difMoney=Math.abs(money-sumMoney);
         timeRate=(sumTime-roadTime)/sumTime;
+        double timeRateUsed=0;
+        if(timeRate>=2/3)
+        {
+            timeRateUsed=1-(1-timeRate)*1/3;
+        }
+        else {
+            timeRateUsed=timeRate+1/6;
+        }
         
         double xtime=difTime/time;
         double xmoney=difMoney/money;
         
-        double timeScale=2-Math.exp(xtime);
+        double timeScale=3-Math.exp(1.5*xtime);
         double moneyScale=1/(1+Math.exp(25-5*xmoney));
         
-        double sumScale=(timeScale+moneyScale)*timeRate;
-        return sumScale;  
+        double sumScale=(timeScale)*timeRateUsed;
+        return sumScale;
     }
 }

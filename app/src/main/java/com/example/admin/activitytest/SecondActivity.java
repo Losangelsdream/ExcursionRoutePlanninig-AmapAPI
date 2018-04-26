@@ -260,6 +260,57 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+
+
+
+    private  void arrangementSelect(ArrayList<Integer> dataList, ArrayList<Integer>tmpResultList, int resultIndex ,ArrayList<Integer> resultList,double resultTime[]) {
+        // 递归选择下一个
+       // System.out.println("最初的结构："+resultTime[0]);
+        if(tmpResultList.size()==dataList.size())
+        {
+            double totaltime=0;
+            for (int t=0;t< tmpResultList.size()-1;t++)
+            {
+                totaltime += poiItemResult.get(tmpResultList.get(t)).getTime_cost()+poi_way_Tcost[tmpResultList.get(t)][tmpResultList.get(t+1)];
+            }
+            totaltime+=poiItemResult.get(tmpResultList.get(tmpResultList.size()-1)).getTime_cost();
+            totaltime+=poi_way_Tcost[0][tmpResultList.get(0)];
+            totaltime+=poi_way_Tcost[tmpResultList.get(tmpResultList.size()-1)][1];
+            if(resultTime[0]>totaltime)
+            {
+                resultTime[0]=totaltime;
+                resultList.clear();
+                for(int i=0;i<tmpResultList.size();i++)
+                {
+                    resultList.add(tmpResultList.get(i));
+                }
+                System.out.println(resultTime[0]);
+                System.out.println(resultList+" ");
+            }
+
+        }
+        else{
+        for (int i = 0; i < dataList.size(); i++) {
+            // 判断待选项是否存在于排列结果中
+            boolean exists = false;
+            for (int j = 0; j < resultIndex; j++) {
+                if (dataList.get(i).equals(tmpResultList.get(j))) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) { // 排列结果不存在该项，才可选择
+                tmpResultList.add(dataList.get(i));
+                arrangementSelect(dataList, tmpResultList, resultIndex + 1,resultList,resultTime);
+                tmpResultList.remove(tmpResultList.size()-1);
+            }
+        }
+        }
+    }
+
+
+
     @Override
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
 
@@ -417,20 +468,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 ArrayList<Integer> poiID = new ArrayList<Integer>();
                 ArrayList<Double> poiLatitude = new ArrayList<Double>();
                 ArrayList<Double> poiLongtitude = new ArrayList<Double>();
-                ArrayList<Integer> SortList = new ArrayList<Integer>();
-                double totaltime=0;
-
-                int totalcost=0;
-                ArrayList<String> poiname_sort = new ArrayList<String>();
-                ArrayList<Double> poiLatitude_sort = new ArrayList<Double>();
-                ArrayList<Double> poiLongtitude_sort = new ArrayList<Double>();
-                double totaltime_sort=0;
-
-                int totalcost_sort=0;
 
                 while(world.goNext())world.Evolution();
                 for(int i=0;i<world.king.staff.size();i++)
                 {
+                    double totaltime=0;
+                    int totalcost=0;
                     System.out.println("路线"+i);
                     for(int j=0;j<world.king.staff.get(i).path.size();j++)
                     {
@@ -441,87 +484,45 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         System.out.println(poiID+"  ");
                         System.out.println(poiname);
                     }
-//                    for (int t=0;t< poiID.size()-1;t++)
-//                    {
-//                        totaltime = poiItemResult.get(poiID.get(t)).getTime_cost()+poi_way_Tcost[poiID.get(t)][poiID.get(t+1)];
-//                        totalcost = (int) (poiItemResult.get(poiID.get(t)).getMoney_cost()+poi_way_Mcost[poiID.get(t)][poiID.get(t+1)]);
-//                    }
-//                    System.out.println("总时间花费:"+totaltime);
-//                    System.out.println("总金钱花费:"+totalcost);
-                    SortList.add(0);
-                    int win=0;
-                    for(int temp=1;temp<poiLatitude.size()-1;temp++)
-                    {
-                        if(poiLatitude.get(temp)>poiLatitude.get(0)&&poiLongtitude.get(temp)>poiLatitude.get(0))
-                        {
-                            win=poiID.get(temp);
-                            SortList.add(win);
-                        }
-                        else if(poiLatitude.get(temp)>poiLatitude.get(0)&&poiLongtitude.get(temp)<poiLatitude.get(0))
-                        {
-                            win=poiID.get(temp);
-                            SortList.add(win);
-                        }
-                        else if(poiLatitude.get(temp)<poiLatitude.get(0)&&poiLongtitude.get(temp)<poiLatitude.get(0))
-                        {
-                            win=poiID.get(temp);
-                            SortList.add(win);
-                        }
-                        else if(poiLatitude.get(temp)<poiLatitude.get(0)&&poiLongtitude.get(temp)>poiLatitude.get(0))
-                        {
-                            win=poiID.get(temp);
-                            SortList.add(win);
-                        }
+                    poiID.remove(0);
+                    poiID.remove(poiID.size()-1);
+                    ArrayList<Integer> tmpResultList=new ArrayList<Integer>();
+                    ArrayList<Integer> resultList=new ArrayList<Integer>();
+                    double[] resultTime=new double[1];
+                    resultTime[0]=999999;
+                    arrangementSelect(poiID,tmpResultList,0,resultList,resultTime);
 
-                    }
-                    SortList.add(1);
-                    for(int temp=0; temp<=SortList.size()-1;temp++)
+                    resultList.add(1);
+                    resultList.add(0,0);
+                    System.out.println(resultList+"  ");
+                    for (int t=0;t< resultList.size()-1;t++)
                     {
-                        System.out.println(SortList.get(temp));
+                        totaltime += poiItemResult.get(resultList.get(t)).getTime_cost()+poi_way_Tcost[resultList.get(t)][resultList.get(t+1)];
+                        totalcost += (int) (poiItemResult.get(resultList.get(t)).getMoney_cost()+poi_way_Mcost[resultList.get(t)][resultList.get(t+1)]);
+                    }
+                    System.out.println("总时间花费:"+totaltime);
+                    System.out.println("总金钱花费:"+totalcost);
+
+                    poiname.clear();
+                    poiLatitude.clear();
+                    poiLongtitude.clear();
+
+                    for(int j=0;j<resultList.size();j++)
+                    {
+                        poiname.add(poiItemResult.get(resultList.get(j)).getName());
+                        poiLatitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLatitude());//纬度
+                        poiLongtitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLongitude());//经度
+                        System.out.println(resultList+"  ");
+                        System.out.println(poiname);
                     }
 
-
-                    for (int temp5=0;temp5<=SortList.size()-1;temp5++)
-                    {
-                        poiname_sort.add(poiItemResult.get(SortList.get(temp5)).getName());
-                        poiLatitude_sort.add(poiItemResult.get(SortList.get(temp5)).getLatlonp().getLatitude());//纬度
-                        poiLongtitude_sort.add(poiItemResult.get(SortList.get(temp5)).getLatlonp().getLongitude());//经度
-                    }
-
-                    for (int t=0;t< SortList.size()-1;t++)
-                    {
-                        totaltime_sort = poiItemResult.get(SortList.get(t)).getTime_cost()+poi_way_Tcost[SortList.get(t)][SortList.get(t+1)];
-                        totalcost_sort = (int) (poiItemResult.get(SortList.get(t)).getMoney_cost()+poi_way_Mcost[SortList.get(t)][SortList.get(t+1)]);
-                    }
-                    System.out.println("总时间花费:"+totaltime_sort);
-                    System.out.println("总金钱花费:"+totalcost_sort);
-
-
-                      //  左走 经度 减小  纬度 不变
-                      //  右走 经度 增大  纬度  不变
-                      //  上走 经度 不变 纬读增加
-                     // 下走  经度不变 纬读减小
-
-
-
-
-
-                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude_sort,poiLongtitude_sort,totaltime_sort,totalcost_sort,poiname_sort);
+                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude,poiLongtitude,totaltime,totalcost,poiname);
                     poiroute.add(RecommendRoute);
 
                     poiname = new ArrayList<String>();
                     poiID = new ArrayList<Integer>();
                     poiLatitude = new ArrayList<Double>();
                     poiLongtitude = new ArrayList<Double>();
-                    totaltime=0;
-                    totalcost=0;
-                    poiname_sort = new ArrayList<String>();
-                    SortList.clear();
-                    poiLatitude_sort = new ArrayList<Double>();
-                    poiLongtitude_sort = new ArrayList<Double>();
-                    totaltime_sort=0;
-                    totalcost_sort=0;
-
                     System.out.println();
                 }
 
@@ -553,7 +554,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onRideRouteSearched(RideRouteResult rideRouteResult, int i) {
-
     }
 }
 
