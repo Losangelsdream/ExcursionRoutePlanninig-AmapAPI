@@ -60,9 +60,10 @@ public class Judger {
         double xmoney=difMoney/money;
         
         double timeScale=3-Math.exp(1.5*xtime);
+        timeRate=2-Math.exp(1-timeRate);
         double moneyScale=1/(1+Math.exp(25-5*xmoney));
         
-        double sumScale=(timeScale)*timeRateUsed;
+        double sumScale=3*(timeScale)+timeRate;
         return sumScale;
     }
 }

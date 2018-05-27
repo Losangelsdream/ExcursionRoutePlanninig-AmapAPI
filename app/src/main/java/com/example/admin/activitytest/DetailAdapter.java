@@ -164,17 +164,17 @@ public class DetailAdapter extends BaseAdapter {
         {
 
             holder.Bus_Icon.setVisibility(View.VISIBLE);
+            holder.Bus_number.setVisibility(View.INVISIBLE);
             holder.Start_station.setVisibility(View.INVISIBLE);
             holder.End_station.setVisibility(View.INVISIBLE);
-            holder.Bus_number.setVisibility(View.INVISIBLE);
-            holder.Bus_duration.setVisibility(View.INVISIBLE);
-
+            holder.Bus_duration.setVisibility(View.VISIBLE);
 
             holder.Line.setImageResource(R.drawable.playbar);
             holder.Bus_Icon.setImageResource(R.drawable.viewpoint);
             holder.Bus_direction.setTextSize(15);
             holder.Bus_direction.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             holder.Bus_direction.setText("游玩("+list.get(position).getStart_name()+")");
+            holder.Bus_duration.setText("游玩时间预计:"+FormatTimeToString2((double) list.get(position).getPlay_time()));
             return convertView;
 
         }
@@ -195,6 +195,15 @@ public class DetailAdapter extends BaseAdapter {
 
 
     public String FormatTimeToString(float time)
+    {
+
+        int hour = (int) (time/3600);
+        int minute = (int) ((time-hour*3600)/60);
+        FormatTime = hour+"小时"+minute+"分钟";
+        return FormatTime;
+    }
+
+    public String FormatTimeToString2(Double time)
     {
 
         int hour = (int) (time/3600);

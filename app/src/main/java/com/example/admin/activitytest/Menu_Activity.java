@@ -20,32 +20,32 @@ import java.util.List;
 
 
 
-public class Main_Activity extends AppCompatActivity implements View.OnClickListener {
-    private MapView mapView = null;
-    private AMap aMap;
-    private MyLocationStyle myLocationStyle = null;
-    private ListView listview = null;
-    private ContentAdapter adapter = null;
-    private List<ContentModel> list;
-    private Button button1 = null;
+public class Menu_Activity extends AppCompatActivity implements View.OnClickListener {
+    private MapView mapView = null;//定义一个地图对象
+    private AMap aMap = null; //定义一个地图显示对象
+    private MyLocationStyle myLocationStyle = null;  //定义定位的风格对象
+    private ListView listview = null;   //定义左侧的列表栏
+    private ContentAdapter adapter = null;  //定义左侧列表栏的相关数据的适配器对象
+    private List<ContentModel> list = new ArrayList<ContentModel>();  //定义左侧菜单栏列表对象
+    private Button button_plan = null; //定义规划按钮对象
     private UiSettings mUiSettings = null;//定义一个UiSettings对象
     private AMapLocationClient locationClient = null;
-    private String test = null;
+    private String start_point = null; //定义一个String对象用于保存定位后的起始地址
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
-        mapView = (MapView) findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);// 此方法必须重写
+
+        
         initView();
         initLeftview();
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
+
         adapter = new ContentAdapter(this, list);
         listview.setAdapter(adapter);
 
-        if (aMap == null) {
-            aMap = mapView.getMap();
-        }
+
         mUiSettings = aMap.getUiSettings();//实例化控件交互对象
         mUiSettings.setZoomControlsEnabled(false);//禁止显示缩放控件
         mUiSettings.setScaleControlsEnabled(true);//显示比例尺
@@ -55,7 +55,6 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
 
         initLocation();
-
         startLocation();
 
     }
@@ -65,8 +64,12 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
      */
     private void initView() {
         listview = (ListView) findViewById(R.id.left_listview);
-        button1 = (Button) findViewById(R.id.button_plan);
-        button1.setOnClickListener(this);
+        button_plan = (Button) findViewById(R.id.button_plan);
+        mapView = (MapView) findViewById(R.id.map);
+        button_plan.setOnClickListener(this);
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
     }
 
     /**
@@ -94,16 +97,18 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
         mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
         mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
         mOption.setOnceLocationLatest(false);//可选，设置是否等待wifi刷新，默认为false.如果设置为true,会自动变为单次定位，持续定位时不要使用
-
         return mOption;
     }
 
     AMapLocationListener locationListener = new AMapLocationListener() {
+        /**
+         * 定义的定位的回调函数
+         * @param amapLocation
+         */
         @Override
         public void onLocationChanged(AMapLocation amapLocation) { //大小写问题
             if (amapLocation != null) {
-//                System.out.println("经度:" + amapLocation.getLongitude() + "纬度:" + amapLocation.getLatitude() + "地址:" + amapLocation.getAddress());
-                test=amapLocation.getAddress();
+                start_point=amapLocation.getAddress();
             } else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 System.out.println( amapLocation.getErrorCode() + ", errInfo:" + amapLocation.getErrorInfo());
@@ -112,20 +117,21 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
     };
 
 
-
+    /**
+     * 用户点击规划按钮后将定位信息传递给下一活动
+     * @param view
+     */
     @Override
     public void onClick(View view) {
-
-        Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
-        intent.putExtra("address",test);
+        Intent intent = new Intent(Menu_Activity.this, SecondActivity.class);
+        intent.putExtra("start_address",start_point);
         startActivity(intent);
     }
 
     /**
-     * 定义侧拉菜单栏的各项作用
+     * 初始化侧拉菜单栏的各项信息
      */
     private void initLeftview() {
-        list = new ArrayList<ContentModel>();
         list.add(new ContentModel(R.drawable.user, "个人中心", 1));
         list.add(new ContentModel(R.drawable.route_history, "历史路线", 2));
         list.add(new ContentModel(R.drawable.comments, "我的评价", 3));
@@ -150,8 +156,10 @@ public class Main_Activity extends AppCompatActivity implements View.OnClickList
         mapView.onResume();
     }
 
+    /**
+     * 定位启动函数
+     */
     private void startLocation(){
-        // 启动定位
         locationClient.startLocation();
     }
 }

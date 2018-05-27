@@ -61,6 +61,15 @@ public class World {
         //0 start 1 end
         System.out.println("init Population Begin");
         int base=3;
+//        if(this.exceptTime>7.5)
+//        {
+//            base=4;
+//        }
+//        if(this.exceptTime<=5)
+//        {
+//            base=2;
+//        }
+
         for(int ss=1;ss<=initNumP;ss++)
         {
             System.out.println(ss);
@@ -127,7 +136,7 @@ public class World {
     
     public boolean goNext()
     {
-        if(age>500)return false;
+        if(age>2000)return false;
         return true;
     }
     

@@ -35,9 +35,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/title_bar"
-            android:layout_above="@id/button_plan"
+            android:layout_above="@id/button_poi"
             android:orientation="vertical">
         </com.amap.api.maps.MapView>
+
+        <Button
+            android:id="@+id/button_poi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:text="周边兴趣点"
+            android:background="@drawable/shape_button"
+            android:layout_above="@id/button_plan"/>
 
         <Button
             android:id="@+id/button_plan"

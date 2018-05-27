@@ -32,6 +32,7 @@ import com.amap.api.services.route.WalkRouteResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private PoiSearch poiSearch; //POI-api接口类
     private ArrayList<MyPoi> poiItemResult;
     private ArrayList<RouteModel> poiroute = new ArrayList<RouteModel>();
-
+    private int[] db_poi ={0, 2, 3, 4, 7, 8, 11, 16, 18, 19, 21, 22, 23, 33, 38, 68, 96, 97};
     public double[][] poi_way_Tcost ;
     public double[][] poi_way_Mcost ;
     public float[] results_time;
@@ -205,6 +206,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onPoiSearched(PoiResult poiResult, int rcode) {
         poiItems = poiResult.getPois();
+
+        System.out.println(poiItems.get(0).getPhotos().get(0).getUrl());
         MyPoi startPoi = new MyPoi(StartingPoint_view.getText().toString(),0,0,startllp);
         MyPoi endPoi = new MyPoi(EndPoint_view.getText().toString(),0,0,endllp);
         poiItemResult = new ArrayList<MyPoi>();
@@ -228,10 +231,17 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 Random rand = new Random();
                 int random=rand.nextInt(228) + 60;
                 MyPoi wayPoi = new MyPoi(poiItems.get(i).getTitle(),cost_time,random,poiItems.get(i).getLatLonPoint());
-                poiItemResult.add(wayPoi);
+                //poiItemResult.add(wayPoi);
             }
         }
 
+        List<Poidbitem> Poidbitems = DataSupport.findAll(Poidbitem.class);
+        for(int i =0;i<=db_poi.length-1;i++)
+        {
+            LatLonPoint wayLat = new LatLonPoint(Double.parseDouble(Poidbitems.get(db_poi[i]).getLantitude()), Double.parseDouble(Poidbitems.get(db_poi[i]).getLongtitude()));
+            MyPoi wayPoiDatabase = new MyPoi(Poidbitems.get(db_poi[i]).getName(),((Poidbitems.get(db_poi[i]).getTime_cost()-(Poidbitems.get(db_poi[i]).getTime_cost()*0.33))*60*60),(int)Poidbitems.get(db_poi[i]).getMoney_cost(),wayLat);
+            poiItemResult.add(wayPoiDatabase);
+        }
 
         poi_way_Tcost = new double[poiItemResult.size()][poiItemResult.size()];
         poi_way_Mcost = new double[poiItemResult.size()][poiItemResult.size()];
@@ -395,6 +405,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 counter += 1;
                 waytime = (double) busRouteResult.getPaths().get(0).getDuration();
                 waycost = (double) busRouteResult.getPaths().get(0).getCost();
+                waytime -= (busRouteResult.getPaths().get(0).getSteps().get(0).getWalk().getDuration())*1.05;
                 for (int i = 0; i <=poiItemResult.size() - 1; i++) {
                     for (int j = 0; j <=poiItemResult.size() - 1; j++) {
                         if (busRouteResult.getBusQuery().getFromAndTo().getFrom() == poiItemResult.get(i).getLatlonp() && busRouteResult.getBusQuery().getFromAndTo().getTo() == poiItemResult.get(j).getLatlonp()) {
@@ -468,6 +479,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 ArrayList<Integer> poiID = new ArrayList<Integer>();
                 ArrayList<Double> poiLatitude = new ArrayList<Double>();
                 ArrayList<Double> poiLongtitude = new ArrayList<Double>();
+                ArrayList<Integer> poiPlaytime = new ArrayList<Integer>();
 
                 while(world.goNext())world.Evolution();
                 for(int i=0;i<world.king.staff.size();i++)
@@ -481,6 +493,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                         poiname.add(poiItemResult.get(world.king.staff.get(i).path.get(j)).getName());
                         poiLatitude.add(poiItemResult.get(world.king.staff.get(i).path.get(j)).getLatlonp().getLatitude());//纬度
                         poiLongtitude.add(poiItemResult.get(world.king.staff.get(i).path.get(j)).getLatlonp().getLongitude());//经度
+                        poiPlaytime.add((int) poiItemResult.get(world.king.staff.get(i).path.get(j)).getTime_cost());
+                        System.out.println("时间"+poiPlaytime);
                         System.out.println(poiID+"  ");
                         System.out.println(poiname);
                     }
@@ -506,25 +520,31 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     poiname.clear();
                     poiLatitude.clear();
                     poiLongtitude.clear();
+                    poiPlaytime.clear();
 
                     for(int j=0;j<resultList.size();j++)
                     {
                         poiname.add(poiItemResult.get(resultList.get(j)).getName());
                         poiLatitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLatitude());//纬度
                         poiLongtitude.add(poiItemResult.get(resultList.get(j)).getLatlonp().getLongitude());//经度
+                        poiPlaytime.add((int) poiItemResult.get(resultList.get(j)).getTime_cost());
                         System.out.println(resultList+"  ");
                         System.out.println(poiname);
+                        System.out.println(poiPlaytime);
                     }
 
-                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude,poiLongtitude,totaltime,totalcost,poiname);
+
+                    RouteModel RecommendRoute = new RouteModel((i+1),poiLatitude,poiLongtitude,totaltime,totalcost,poiname,poiPlaytime);
                     poiroute.add(RecommendRoute);
 
                     poiname = new ArrayList<String>();
                     poiID = new ArrayList<Integer>();
+                    poiPlaytime = new ArrayList<Integer>();
                     poiLatitude = new ArrayList<Double>();
                     poiLongtitude = new ArrayList<Double>();
                     System.out.println();
                 }
+
 
                 Intent intent = new Intent(SecondActivity.this,Route_plan_show_Activity.class);
                 intent.putExtra("startpoint",StartingPoint_view.getText().toString());

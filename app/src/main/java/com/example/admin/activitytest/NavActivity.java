@@ -96,7 +96,7 @@ public class NavActivity extends AppCompatActivity implements OnRouteSearchListe
         mapView.onCreate(savedInstanceState);// 此方法必须重写
         initView();
         Intent intent = getIntent();
-        routemodel = (RouteModel)intent.getSerializableExtra("route");
+        routemodel = (RouteModel) intent.getSerializableExtra("route");
 
         detail = new Detail(Start_Mode,routemodel.getScenicSpot().get(0));
         detail_list.add(detail);
@@ -223,7 +223,7 @@ public class NavActivity extends AppCompatActivity implements OnRouteSearchListe
         }
         counter_recall=counter_recall+1;
 
-        detail = new Detail(play_Mode,routemodel.getScenicSpot().get(counter_recall));
+        detail = new Detail(play_Mode,routemodel.getScenicSpot().get(counter_recall),routemodel.getPoiPlayTime().get(counter_recall));
         detail_list.add(detail);
 
         if(counter_recall==(routemodel.getPoiLatitude().size()-1))

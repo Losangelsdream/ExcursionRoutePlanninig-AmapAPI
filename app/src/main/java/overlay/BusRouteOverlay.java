@@ -154,7 +154,7 @@ public class BusRouteOverlay extends RouteOverlay {
 			else if(start_flag==true && finish_flag==false){
 				addStartMarker();
 			}
-			else
+			else if(start_flag==false&&finish_flag==false)
 			{
 				addViaMarker();
 			}

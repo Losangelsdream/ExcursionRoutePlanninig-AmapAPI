@@ -15,9 +15,9 @@ public class RouteModel implements Serializable {
     private double totalTime;
     private int totalCost;
     private List<String> scenicSpot = new ArrayList<>();
-
     private List<Double> poiLatitude = new ArrayList<>();
     private List<Double> poiLongtitude = new ArrayList<>();
+    private List<Integer> poiPlayTime = new ArrayList<>();
 
     private List<Double> RoutePartTime=new ArrayList<>();
     private List<Integer> RoutePartCost = new ArrayList<>();
@@ -25,7 +25,7 @@ public class RouteModel implements Serializable {
 
 
 
-    public RouteModel(int id, List<Double> poiLatitude,List<Double> poiLongtitude, double totalTime, int totalCost, List<String> scenicSpot)
+    public RouteModel(int id, List<Double> poiLatitude,List<Double> poiLongtitude, double totalTime, int totalCost, List<String> scenicSpot,List<Integer> poiPlayTime)
     {
        this.ID=id;
        this.totalTime=totalTime;
@@ -33,6 +33,7 @@ public class RouteModel implements Serializable {
        this.scenicSpot = scenicSpot;
        this.poiLatitude = poiLatitude;
        this.poiLongtitude = poiLongtitude;
+       this.poiPlayTime = poiPlayTime;
 
 //       this.RoutePartTime=RoutePartTime;
 //       this.RoutePartCost=RoutePartCost;
@@ -112,5 +113,13 @@ public class RouteModel implements Serializable {
 
     public void setPoiLongtitude(List<Double> poiLongtitude) {
         this.poiLongtitude = poiLongtitude;
+    }
+
+    public List<Integer> getPoiPlayTime() {
+        return poiPlayTime;
+    }
+
+    public void setPoiPlayTime(List<Integer> poiPlayTime) {
+        this.poiPlayTime = poiPlayTime;
     }
 }

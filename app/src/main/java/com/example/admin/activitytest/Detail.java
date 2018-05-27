@@ -25,11 +25,19 @@ public class Detail {
     private Float Walk_distance;
     private Long  Walk_time;
     private String start_name;
+    private int play_time;
 
     public Detail(int Trans_mode,String My_name)
     {
         this.Trans_Mode=Trans_mode;
         this.start_name=My_name;
+    }
+
+    public Detail(int Trans_mode,String My_name,int play_time)
+    {
+        this.Trans_Mode = Trans_mode;
+        this.start_name = My_name;
+        this.play_time = play_time;
     }
 
 
@@ -41,7 +49,6 @@ public class Detail {
         this.Bus_duration=Bus_duration;
         this.Bus_Start=Bus_Start;
         this.Bus_Station_Number=Bus_Station_Number;
-
     }
 
     public Detail(int Trans_Mode,Float Walk_distance,Long Walk_duration)
@@ -128,5 +135,13 @@ public class Detail {
 
     public void setStart_name(String start_name) {
         this.start_name = start_name;
+    }
+
+    public int getPlay_time() {
+        return play_time;
+    }
+
+    public void setPlay_time(int play_time) {
+        this.play_time = play_time;
     }
 }

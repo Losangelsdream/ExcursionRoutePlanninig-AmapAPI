@@ -2,11 +2,13 @@ package com.example.admin.activitytest;
 
 import com.amap.api.services.core.LatLonPoint;
 
+import java.io.Serializable;
+
 /**
  * Created by Admin on 2018/4/18.
  */
 
-public class MyPoi {
+public class MyPoi implements Serializable {
     private String name;
     private double time_cost;
     private int money_cost;

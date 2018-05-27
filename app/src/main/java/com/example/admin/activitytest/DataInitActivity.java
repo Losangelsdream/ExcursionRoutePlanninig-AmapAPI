@@ -60,30 +60,38 @@ public class DataInitActivity extends AppCompatActivity implements RouteSearch.O
         routeSearch = new RouteSearch(this);
         routeSearch.setRouteSearchListener(this);
         createDatabase.setOnClickListener(this);
+        calculateWayTime();
 
     }
 
     private void calculateWayTime() {
         LatLonPoint startpoint = new LatLonPoint(39.961580, 116.357770);
         List<Poidbitem> Poidbitems = DataSupport.findAll(Poidbitem.class);
+        List<Integer> ChoiceID = new ArrayList<Integer>();
+
+
         for (int i = 0; i <= Poidbitems.size() - 1; i++) {
             LatLonPoint wayLat = new LatLonPoint(Double.parseDouble(Poidbitems.get(i).getLantitude()), Double.parseDouble(Poidbitems.get(i).getLongtitude()));
-            MyPoi wayPoi = new MyPoi(Poidbitems.get(i).getName(), Poidbitems.get(i).getTime_cost(), (int) Poidbitems.get(i).getMoney_cost(), wayLat);
-            poiItemResult.add(wayPoi);
-
+            float distance = AMapUtils.calculateLineDistance( AMapUtil.convertToLatLng(wayLat), AMapUtil.convertToLatLng(startpoint));
+            if (distance<15000)
+            {
+                ChoiceID.add(i);
+            }System.out.println(ChoiceID);
+//            MyPoi wayPoi = new MyPoi(Poidbitems.get(i).getName(), Poidbitems.get(i).getTime_cost(), (int) Poidbitems.get(i).getMoney_cost(), wayLat);
+//            poiItemResult.add(wayPoi);
         }
-        System.out.println(poiItemResult.size());//111
+        //System.out.println(poiItemResult.size());//111
 
-        for (int i = 30; i<=poiItemResult.size()-50;i++ )  //20-2+
-        {
-            for (int j = 0; j <= poiItemResult.size() - 1; j++) {
-
-                final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(poiItemResult.get(i).getLatlonp(), poiItemResult.get(j).getLatlonp()); //起点是0  终点是146
-                RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, AMapUtils.BUS_TIME_FIRST, mCurrentCityName, 0);
-                routeSearch.calculateBusRouteAsyn(query);
-            }
-
-        }
+//        for (int i = 30; i<=poiItemResult.size()-50;i++ )  //20-2+
+//        {
+//            for (int j = 0; j <= poiItemResult.size() - 1; j++) {
+//
+//                final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(poiItemResult.get(i).getLatlonp(), poiItemResult.get(j).getLatlonp()); //起点是0  终点是146
+//                RouteSearch.BusRouteQuery query = new RouteSearch.BusRouteQuery(fromAndTo, AMapUtils.BUS_TIME_FIRST, mCurrentCityName, 0);
+//                routeSearch.calculateBusRouteAsyn(query);
+//            }
+//
+//        }
     }
 
 

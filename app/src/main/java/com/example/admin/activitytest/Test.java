@@ -124,7 +124,7 @@ public class Test extends AppCompatActivity implements RouteSearch.OnRouteSearch
         ScenicSpot.add("北京邮电大学北门");
         totalcost=357;
         totaltime= 14730.0;
-        routemodel = new RouteModel(1,poiLatitude,poiLongtitude,totaltime,totalcost,ScenicSpot);
+       // routemodel = new RouteModel(1,poiLatitude,poiLongtitude,totaltime,totalcost,ScenicSpot);
     }
 
     private void initView() {
