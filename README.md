@@ -1,5 +1,10 @@
 # ExcursionRoutePlanninig-AmapAPI
 觅途                         ----基于LBS的短途游规划系统
+<p>一、本项目主要针对游客在某城市中转过程中有限时间内（4-8小时）的旅游路线进行规划。<p>
+<p><strong>①4-8小时的短途游安排。</strong></p>
+<p><strong>②用户输入时间预算、花费预算、偏好地点、起始地点。</strong></p>
+<p><strong>③使用遗传算法对起始地点周边的POI点进行规划。</strong></p>
+<p><strong>④调用高德API，对规划好的路线进行详情展示。 </strong></p>
 
 <p><strong>#主界面</strong></p>
 <p align="left">
